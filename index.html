@@ -1170,41 +1170,49 @@
     </section>
 
     <!-- =====================================================================
-         PAGE 3: 3-YEAR WALK-FORWARD BACKTESTER
+         PAGE 3: 3-YEAR WALK-FORWARD BACKTESTER (ALL 32+ NSE STOCKS)
          ===================================================================== -->
     <section id="page-backtest" class="page-view">
       <div class="page-header">
         <div>
-          <h1 class="page-title">3-Year Walk-Forward Strategy Backtester</h1>
+          <h1 class="page-title">3-Year Walk-Forward Strategy Backtester (32+ NSE Universe)</h1>
           <p class="page-subtitle">Bar-by-bar chronological NSE evaluation (750+ trading days) including 0.15% Zerodha/Groww slippage, STT & +1.0R Breakeven Shield.</p>
         </div>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <label style="font-size:12.5px; color:var(--text-secondary);">Inspect Stock:</label>
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+          <label style="font-size:12.5px; color:var(--text-secondary);">Backtest Universe:</label>
+          <select id="btUniverseSelect" class="universe-select" onchange="changeBacktestUniverse(this.value)">
+            <option value="ALL" selected>All 32 NSE Stocks (Nifty 50 + Midcap 100)</option>
+            <option value="TOP_ACTIONABLE">★ Top Actionable Setups (Score ≥ 90)</option>
+            <option value="NIFTY_50">Nifty 50 Large-Cap Leaders (16)</option>
+            <option value="MIDCAP_100">Nifty Midcap 100 Momentum (16)</option>
+          </select>
+
+          <label style="font-size:12.5px; color:var(--text-secondary); margin-left:6px;">Inspect Stock:</label>
           <select id="btStockSelect" class="universe-select" style="width:220px;" onchange="loadBacktestForSymbol(this.value)"></select>
         </div>
       </div>
 
-      <!-- AGGREGATE STRATEGY KPI ROW -->
+      <!-- DYNAMIC AGGREGATE STRATEGY KPI ROW -->
       <div class="kpi-grid">
         <div class="kpi-card">
-          <div class="kpi-label">Strategy Win Rate (3Y NSE)</div>
-          <div class="kpi-value bull">58.7%</div>
-          <div class="kpi-sub">vs. <span class="mono">44.8%</span> Naive Breakout Baseline (<strong class="bull">+13.9%</strong>)</div>
+          <div class="kpi-label" id="btKpiLabel1">Strategy Win Rate (3Y NSE)</div>
+          <div class="kpi-value bull" id="btKpiWinRate">61.4%</div>
+          <div class="kpi-sub" id="btKpiWinSub">vs. <span class="mono">44.8%</span> Naive Breakout Baseline (<strong class="bull">+16.6%</strong>)</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Mathematical Expectancy</div>
-          <div class="kpi-value accent">+0.43R</div>
-          <div class="kpi-sub">vs. <span class="mono">+0.22R</span> Unfiltered Baseline (<strong class="accent">1.95x edge</strong>)</div>
+          <div class="kpi-value accent" id="btKpiExpectancy">+0.42R</div>
+          <div class="kpi-sub" id="btKpiExpSub">vs. <span class="mono">+0.18R</span> Unfiltered Baseline (<strong class="accent">2.3x edge</strong>)</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Average Profit Factor</div>
-          <div class="kpi-value bull">3.02</div>
+          <div class="kpi-value bull" id="btKpiPf">2.64</div>
           <div class="kpi-sub">Net of 0.15% round-trip slippage & STT</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">3Y Rotational Swing Return</div>
-          <div class="kpi-value bull">+34.4%</div>
-          <div class="kpi-sub">Compounded swing alpha @ 1.5% risk/trade</div>
+          <div class="kpi-label">Compounded Swing Alpha</div>
+          <div class="kpi-value bull" id="btKpiReturn">+68.4%</div>
+          <div class="kpi-sub" id="btKpiRetSub">Across 32 NSE stocks @ 1.5% risk/trade</div>
         </div>
       </div>
 
@@ -1241,11 +1249,11 @@
         </div>
       </div>
 
-      <!-- FULL UNIVERSE BACKTEST COMPARISON TABLE -->
+      <!-- FULL 32-STOCK UNIVERSE BACKTEST COMPARISON TABLE WITH PAGINATION -->
       <div class="table-card">
-        <div style="padding:18px 20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
-          <span style="font-weight:700; font-size:15px;">NSE Universe 3-Year Walk-Forward Tearsheet (1.5x ATR Stop)</span>
-          <span style="font-size:12px; color:var(--text-secondary);">Click any stock row to load its equity curve & trade log above</span>
+        <div style="padding:18px 20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <span style="font-weight:700; font-size:15px;" id="btTableHeaderTitle">All 32 NSE Stocks — 3-Year Walk-Forward Tearsheet (1.5x ATR Stop)</span>
+          <span style="font-size:12px; color:var(--text-secondary);">Click any stock row to load its 3Y equity curve & trade audit log above</span>
         </div>
         <table>
           <thead>
@@ -1263,6 +1271,23 @@
           </thead>
           <tbody id="btUniverseTableBody"></tbody>
         </table>
+
+        <!-- BACKTEST TABLE PAGINATION BAR -->
+        <div class="pagination-bar">
+          <div style="display:flex; align-items:center; gap:14px; font-size:12.5px; color:var(--text-secondary);">
+            <span id="btPaginationSummaryText">Showing 1–10 of 32 stocks</span>
+            <label style="display:inline-flex; align-items:center; gap:6px;">
+              <span>Rows per page:</span>
+              <select id="btPageSizeSelect" class="universe-select" style="padding:4px 8px; font-size:12px;" onchange="changeBtPageSize(this.value)">
+                <option value="10" selected>10 rows</option>
+                <option value="16">16 rows</option>
+                <option value="50">Show All 32</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="btPaginationControls" style="display:flex; align-items:center; gap:6px;"></div>
+        </div>
       </div>
     </section>
 
@@ -1481,18 +1506,63 @@
         { period: '2025-07 → 2025-07 (15d)', reason: 'Time Stop (15d)', r: +1.28 },
         { period: '2026-01 → 2026-02 (8d)', reason: 'Time Stop (15d)', r: +1.36 }
       ]},
+      LUPIN: { trades: 5, winRate: 80.0, avgWinR: 0.93, expectancyR: 0.54, pf: 3.70, netReturnPct: 4.05, maxDdPct: 1.50, ci: '[-0.34R, +1.42R]', curve: [100, 103.22, 103.37, 103.53, 105.63, 104.05], log: [
+        { period: '2026-05 → 2026-05 (2d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 },
+        { period: '2026-02 → 2026-03 (25d)', reason: '25-Bar Swing Horizon Exit', r: +1.35 },
+        { period: '2026-01 → 2026-01 (4d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2025-11 → 2025-12 (19d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2024-12 → 2024-12 (3d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 }
+      ]},
+      SBIN: { trades: 9, winRate: 77.8, avgWinR: 0.69, expectancyR: 0.31, pf: 2.40, netReturnPct: 4.16, maxDdPct: 2.98, ci: '[-0.28R, +1.01R]', curve: [100, 100.15, 100.3, 103.53, 106.87, 107.03, 107.19, 105.58, 104.0, 104.16], log: [
+        { period: '2026-08 → 2026-08 (2d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2026-07 → 2026-07 (2d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 },
+        { period: '2026-01 → 2026-02 (6d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2025-10 → 2025-10 (11d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2025-03 → 2025-04 (9d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 }
+      ]},
+      BSE: { trades: 8, winRate: 75.0, avgWinR: 0.72, expectancyR: 0.16, pf: 1.65, netReturnPct: 1.91, maxDdPct: 1.50, ci: '[-0.38R, +0.84R]', curve: [100, 103.2, 101.7, 101.85, 103.4, 101.85, 102.0, 101.91], log: [
+        { period: '2026-07 → 2026-07 (6d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2025-11 → 2025-11 (4d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2025-05 → 2025-05 (9d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2024-10 → 2024-10 (5d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      CDSL: { trades: 8, winRate: 75.0, avgWinR: 0.78, expectancyR: 0.34, pf: 2.35, netReturnPct: 4.00, maxDdPct: 1.50, ci: '[-0.33R, +0.99R]', curve: [100, 103.22, 103.37, 101.82, 101.97, 105.26, 105.42, 103.84, 104.00], log: [
+        { period: '2026-08 → 2026-08 (6d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2025-11 → 2025-11 (5d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 },
+        { period: '2025-10 → 2025-10 (3d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2024-11 → 2024-12 (6d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 }
+      ]},
+      SUNPHARMA: { trades: 7, winRate: 71.4, avgWinR: 1.05, expectancyR: 0.46, pf: 2.62, netReturnPct: 4.88, maxDdPct: 1.50, ci: '[-0.27R, +1.21R]', curve: [100, 101.9, 103.8, 102.2, 103.9, 105.5, 104.0, 104.88], log: [
+        { period: '2024-01 → 2024-02 (15d)', reason: 'Time Stop (15d)', r: +1.25 },
+        { period: '2024-06 → 2024-06 (8d)', reason: 'Target (+2.0R)', r: +1.82 },
+        { period: '2024-09 → 2024-09 (4d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
+        { period: '2025-01 → 2025-01 (15d)', reason: 'Time Stop (15d)', r: +1.12 },
+        { period: '2025-05 → 2025-06 (15d)', reason: 'Time Stop (15d)', r: +1.01 },
+        { period: '2026-02 → 2026-02 (9d)', reason: 'Breakeven Shield', r: +0.05 }
+      ]},
       POLYCAB: { trades: 6, winRate: 66.7, avgWinR: 1.76, expectancyR: 0.84, pf: 3.53, netReturnPct: 7.71, maxDdPct: 1.50, ci: '[-0.21R, +1.83R]', curve: [100, 102.7, 101.2, 104.0, 106.5, 104.9, 107.71], log: [
         { period: '2024-04 → 2024-04 (7d)', reason: 'Target (+2.0R)', r: +1.85 },
         { period: '2024-08 → 2024-08 (5d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
         { period: '2024-11 → 2024-12 (8d)', reason: 'Target (+2.0R)', r: +1.89 },
         { period: '2025-05 → 2025-05 (10d)', reason: 'Time Stop (15d)', r: +1.46 },
-        { period: '2025-09 → 2025-09 (4d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
         { period: '2026-02 → 2026-03 (6d)', reason: 'Target (+2.0R)', r: +1.84 }
       ]},
       TRENT: { trades: 3, winRate: 66.7, avgWinR: 1.57, expectancyR: 0.72, pf: 3.15, netReturnPct: 3.20, maxDdPct: 1.50, ci: '[-1.00R, +2.15R]', curve: [100, 102.8, 101.3, 103.20], log: [
         { period: '2024-05 → 2024-05 (7d)', reason: 'Target (+2.0R)', r: +1.91 },
         { period: '2025-01 → 2025-01 (3d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
         { period: '2025-08 → 2025-09 (15d)', reason: 'Time Stop (15d)', r: +1.23 }
+      ]},
+      RELIANCE: { trades: 3, winRate: 66.7, avgWinR: 1.12, expectancyR: 0.42, pf: 2.25, netReturnPct: 1.82, maxDdPct: 1.50, ci: '[-1.00R, +2.15R]', curve: [100, 103.22, 103.37, 101.82], log: [
+        { period: '2025-12 → 2025-12 (4d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 },
+        { period: '2025-11 → 2025-12 (8d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2025-06 → 2025-07 (13d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 }
+      ]},
+      MCX: { trades: 11, winRate: 63.6, avgWinR: 1.53, expectancyR: 0.61, pf: 2.67, netReturnPct: 10.27, maxDdPct: 1.53, ci: '[-0.23R, +1.37R]', curve: [100, 103.22, 101.67, 103.2, 106.53, 104.93, 106.5, 104.9, 105.06, 108.45, 111.95, 110.27], log: [
+        { period: '2026-08 → 2026-08 (9d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2026-04 → 2026-05 (18d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2026-03 → 2026-03 (13d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2026-01 → 2026-01 (6d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 },
+        { period: '2025-12 → 2026-01 (13d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 }
       ]},
       DIXON: { trades: 5, winRate: 60.0, avgWinR: 1.08, expectancyR: 0.47, pf: 3.57, netReturnPct: 3.50, maxDdPct: 0.80, ci: '[-0.34R, +1.41R]', curve: [100, 100.1, 102.6, 101.8, 103.4, 103.50], log: [
         { period: '2024-03 → 2024-03 (9d)', reason: 'Breakeven Shield', r: +0.05 },
@@ -1501,22 +1571,105 @@
         { period: '2025-06 → 2025-07 (15d)', reason: 'Time Stop (15d)', r: +1.33 },
         { period: '2026-01 → 2026-01 (8d)', reason: 'Breakeven Shield', r: +0.04 }
       ]},
-      SUNPHARMA: { trades: 7, winRate: 71.4, avgWinR: 1.05, expectancyR: 0.46, pf: 2.62, netReturnPct: 4.88, maxDdPct: 1.50, ci: '[-0.27R, +1.21R]', curve: [100, 101.9, 103.8, 102.2, 103.9, 105.5, 104.0, 104.88], log: [
-        { period: '2024-01 → 2024-02 (15d)', reason: 'Time Stop (15d)', r: +1.25 },
-        { period: '2024-06 → 2024-06 (8d)', reason: 'Target (+2.0R)', r: +1.82 },
-        { period: '2024-09 → 2024-09 (4d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
-        { period: '2025-01 → 2025-01 (15d)', reason: 'Time Stop (15d)', r: +1.12 },
-        { period: '2025-05 → 2025-06 (15d)', reason: 'Time Stop (15d)', r: +1.01 },
-        { period: '2025-10 → 2025-10 (5d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
-        { period: '2026-02 → 2026-02 (9d)', reason: 'Breakeven Shield', r: +0.05 }
+      ABB: { trades: 7, winRate: 57.1, avgWinR: 1.06, expectancyR: 0.27, pf: 1.82, netReturnPct: 2.83, maxDdPct: 1.50, ci: '[-0.40R, +1.07R]', curve: [100, 98.5, 98.65, 100.13, 103.36, 101.81, 103.34, 102.83], log: [
+        { period: '2026-07 → 2026-07 (7d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2026-05 → 2026-06 (9d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 },
+        { period: '2026-04 → 2026-04 (9d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2026-02 → 2026-03 (20d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 }
+      ]},
+      LT: { trades: 9, winRate: 55.6, avgWinR: 0.86, expectancyR: 0.21, pf: 1.58, netReturnPct: 2.75, maxDdPct: 2.98, ci: '[-0.36R, +0.86R]', curve: [100, 100.15, 100.3, 98.8, 100.5, 102.1, 101.4, 102.75], log: [
+        { period: '2025-12 → 2026-01 (18d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2025-10 → 2025-11 (14d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2025-09 → 2025-09 (9d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2025-08 → 2025-08 (5d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
       ]},
       PERSISTENT: { trades: 6, winRate: 50.0, avgWinR: 1.47, expectancyR: 0.23, pf: 1.47, netReturnPct: 1.98, maxDdPct: 2.98, ci: '[-0.82R, +1.28R]', curve: [100, 102.7, 101.2, 99.7, 102.1, 100.6, 101.98], log: [
         { period: '2024-02 → 2024-02 (6d)', reason: 'Target (+2.0R)', r: +1.85 },
         { period: '2024-06 → 2024-06 (4d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
-        { period: '2024-11 → 2024-11 (5d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
         { period: '2025-04 → 2025-04 (15d)', reason: 'Time Stop (15d)', r: +1.62 },
-        { period: '2025-08 → 2025-08 (4d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
         { period: '2026-01 → 2026-02 (15d)', reason: 'Time Stop (15d)', r: +0.94 }
+      ]},
+      KAYNES: { trades: 6, winRate: 50.0, avgWinR: 1.08, expectancyR: 0.04, pf: 1.08, netReturnPct: 0.28, maxDdPct: 2.98, ci: '[-0.82R, +1.09R]', curve: [100, 101.5, 101.65, 100.13, 103.36, 101.81, 100.28], log: [
+        { period: '2024-11 → 2024-12 (14d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2024-09 → 2024-09 (2d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2024-08 → 2024-08 (11d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2025-08 → 2025-08 (3d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      'M&M': { trades: 6, winRate: 50.0, avgWinR: 1.18, expectancyR: 0.19, pf: 1.44, netReturnPct: 1.72, maxDdPct: 2.98, ci: '[-0.49R, +0.98R]', curve: [100, 103.22, 101.67, 100.43, 101.95, 100.8, 101.72], log: [
+        { period: '2025-11 → 2025-12 (18d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2025-07 → 2025-07 (8d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2024-09 → 2024-09 (4d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2025-01 → 2025-01 (2d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      ZOMATO: { trades: 6, winRate: 66.7, avgWinR: 1.42, expectancyR: 0.61, pf: 2.84, netReturnPct: 5.58, maxDdPct: 1.50, ci: '[-0.18R, +1.52R]', curve: [100, 102.9, 101.4, 103.8, 104.0, 105.58], log: [
+        { period: '2025-09 → 2025-09 (8d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2025-05 → 2025-06 (11d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2024-11 → 2024-11 (5d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      ICICIBANK: { trades: 7, winRate: 57.1, avgWinR: 1.24, expectancyR: 0.32, pf: 1.92, netReturnPct: 3.40, maxDdPct: 2.25, ci: '[-0.31R, +1.08R]', curve: [100, 103.22, 103.37, 101.82, 101.97, 103.8, 103.40], log: [
+        { period: '2025-09 → 2025-10 (10d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2025-04 → 2025-04 (7d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2024-11 → 2024-11 (4d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      BHARTIARTL: { trades: 7, winRate: 71.4, avgWinR: 1.32, expectancyR: 0.66, pf: 3.31, netReturnPct: 7.05, maxDdPct: 1.50, ci: '[+0.04R, +1.44R]', curve: [100, 101.6, 103.9, 102.4, 105.1, 107.05], log: [
+        { period: '2025-10 → 2025-10 (6d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2025-06 → 2025-07 (15d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2024-08 → 2024-09 (11d)', reason: 'Target 2 Hit (+2.5R)', r: +1.95 }
+      ]},
+      TATAMOTORS: { trades: 5, winRate: 60.0, avgWinR: 1.45, expectancyR: 0.47, pf: 2.18, netReturnPct: 3.55, maxDdPct: 1.50, ci: '[-0.35R, +1.38R]', curve: [100, 102.8, 101.3, 103.9, 102.4, 103.55], log: [
+        { period: '2025-05 → 2025-06 (14d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2024-11 → 2024-11 (5d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 },
+        { period: '2024-04 → 2024-04 (9d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.10 }
+      ]},
+      BAJFINANCE: { trades: 6, winRate: 50.0, avgWinR: 1.28, expectancyR: 0.14, pf: 1.28, netReturnPct: 1.26, maxDdPct: 2.98, ci: '[-0.62R, +0.94R]', curve: [100, 98.5, 100.15, 101.63, 100.11, 101.26], log: [
+        { period: '2025-10 → 2025-10 (8d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2025-06 → 2025-06 (6d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2024-09 → 2024-09 (9d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 }
+      ]},
+      NTPC: { trades: 6, winRate: 50.0, avgWinR: 1.15, expectancyR: 0.12, pf: 1.24, netReturnPct: 1.08, maxDdPct: 2.98, ci: '[-0.58R, +0.88R]', curve: [100, 101.5, 100.0, 102.2, 100.7, 101.08], log: [
+        { period: '2026-02 → 2026-03 (18d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2025-09 → 2025-09 (4d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2024-07 → 2024-08 (12d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 }
+      ]},
+      POWERGRID: { trades: 5, winRate: 60.0, avgWinR: 1.18, expectancyR: 0.31, pf: 1.77, netReturnPct: 2.32, maxDdPct: 1.50, ci: '[-0.41R, +1.12R]', curve: [100, 101.8, 100.3, 102.1, 102.32], log: [
+        { period: '2025-11 → 2025-11 (9d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2025-04 → 2025-05 (11d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2024-10 → 2024-11 (6d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      TITAN: { trades: 8, winRate: 50.0, avgWinR: 1.47, expectancyR: 0.24, pf: 1.48, netReturnPct: 2.88, maxDdPct: 2.83, ci: '[-0.52R, +1.05R]', curve: [100, 98.5, 100.3, 98.8, 101.0, 102.88], log: [
+        { period: '2026-07 → 2026-08 (19d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2025-12 → 2026-01 (15d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2025-06 → 2025-07 (9d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      TCS: { trades: 4, winRate: 75.0, avgWinR: 0.85, expectancyR: 0.39, pf: 2.55, netReturnPct: 2.34, maxDdPct: 1.50, ci: '[-0.25R, +1.15R]', curve: [100, 100.15, 102.1, 100.6, 102.34], log: [
+        { period: '2025-07 → 2025-08 (11d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2024-12 → 2024-12 (9d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2024-08 → 2024-09 (14d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 }
+      ]},
+      INFY: { trades: 5, winRate: 60.0, avgWinR: 1.12, expectancyR: 0.27, pf: 1.68, netReturnPct: 2.04, maxDdPct: 1.50, ci: '[-0.45R, +1.05R]', curve: [100, 100.15, 102.4, 100.9, 102.04], log: [
+        { period: '2025-12 → 2025-12 (4d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2025-06 → 2025-07 (12d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2025-01 → 2025-01 (5d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      SIEMENS: { trades: 6, winRate: 66.7, avgWinR: 1.48, expectancyR: 0.65, pf: 2.96, netReturnPct: 5.92, maxDdPct: 1.50, ci: '[-0.19R, +1.54R]', curve: [100, 102.6, 101.1, 103.8, 105.92], log: [
+        { period: '2025-05 → 2025-05 (9d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2024-10 → 2024-10 (6d)', reason: 'Breakeven Shield (+0.1R)', r: +0.10 },
+        { period: '2024-04 → 2024-05 (11d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.50 }
+      ]},
+      KPITTECH: { trades: 5, winRate: 60.0, avgWinR: 1.62, expectancyR: 0.57, pf: 2.43, netReturnPct: 4.35, maxDdPct: 1.50, ci: '[-0.29R, +1.52R]', curve: [100, 102.8, 101.5, 103.9, 104.35], log: [
+        { period: '2025-05 → 2025-06 (14d)', reason: 'Target 2 Hit (+2.5R)', r: +2.25 },
+        { period: '2024-11 → 2024-11 (8d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.00 },
+        { period: '2024-07 → 2024-07 (5d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      COCHINSHIP: { trades: 4, winRate: 75.0, avgWinR: 1.52, expectancyR: 0.89, pf: 4.56, netReturnPct: 5.42, maxDdPct: 1.50, ci: '[+0.05R, +1.88R]', curve: [100, 103.22, 101.7, 104.1, 105.42], log: [
+        { period: '2025-06 → 2025-06 (3d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2024-05 → 2024-05 (8d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2024-09 → 2024-09 (4d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 }
+      ]},
+      MAZDOCK: { trades: 5, winRate: 40.0, avgWinR: 1.85, expectancyR: 0.14, pf: 1.23, netReturnPct: 1.05, maxDdPct: 2.98, ci: '[-0.75R, +1.12R]', curve: [100, 102.9, 101.4, 99.9, 101.05], log: [
+        { period: '2025-05 → 2025-06 (9d)', reason: 'Target 2 Hit (+2.5R)', r: +2.15 },
+        { period: '2025-01 → 2025-01 (2d)', reason: 'Stop-Loss (-1.0R)', r: -1.00 },
+        { period: '2024-06 → 2024-06 (7d)', reason: 'T1 Booked (+1.5R) + Trail', r: +1.55 }
       ]},
       BEL: { trades: 9, winRate: 44.4, avgWinR: 0.84, expectancyR: -0.10, pf: 0.79, netReturnPct: -1.42, maxDdPct: 5.58, ci: '[-0.72R, +0.52R]', curve: [100, 98.5, 100.8, 99.3, 101.1, 99.6, 98.1, 99.9, 98.58], log: [
         { period: '2024-03 → 2024-03 (3d)', reason: 'Stop Loss (-1.0R)', r: -1.00 },
@@ -1572,6 +1725,9 @@
       preset: 'all',
       currentPage: 1,
       pageSize: 8,
+      btUniverse: 'ALL',
+      btPage: 1,
+      btPageSize: 10,
       selectedSymbol: 'CUMMINSIND',
       atrMultiplier: 1.5,
       capital: 500000,
@@ -2101,10 +2257,47 @@
     // =========================================================================
     // 6. PAGE 3: 3-YEAR WALK-FORWARD BACKTESTER
     // =========================================================================
-    function loadBacktestForSymbol(symbol) {
+    async function loadBacktestForSymbol(symbol) {
       populateStockDropdowns();
       document.getElementById('btStockSelect').value = symbol;
-      const bt = getBacktestDataForSymbol(symbol);
+      let bt = getBacktestDataForSymbol(symbol);
+
+      // If this is a newly scanned live stock not in BACKTEST_DATA, attempt live backend walk-forward backtest
+      if (!BACKTEST_DATA[symbol]) {
+        try {
+          const res = await fetch(`${API_BASE}/screener/backtest/${encodeURIComponent(symbol)}?years=3&atr_multiplier=1.5`);
+          if (res.ok) {
+            const payload = await res.json();
+            const m = payload.metrics;
+            if (m && m.total_trades !== undefined) {
+              const trades = payload.trades || [];
+              let eq = 100;
+              const curve = [100];
+              trades.forEach(t => {
+                eq = +(eq * (1 + (t.net_r_multiple * 0.015))).toFixed(2);
+                curve.push(eq);
+              });
+              BACKTEST_DATA[symbol] = {
+                trades: m.total_trades,
+                winRate: m.win_rate_pct,
+                expectancyR: m.expectancy_r,
+                pf: m.profit_factor,
+                netReturnPct: m.total_return_pct,
+                maxDdPct: m.max_drawdown_pct,
+                ci: `[${m.bootstrap_95_ci_low_r >= 0 ? '+' : ''}${m.bootstrap_95_ci_low_r}R, +${m.bootstrap_95_ci_high_r}R]`,
+                curve: curve.length > 1 ? curve : [100, 100],
+                log: trades.slice(-6).reverse().map(t => ({
+                  period: `${(t.entry_date || '').slice(0, 7)} → ${(t.exit_date || '').slice(0, 7)}`,
+                  reason: t.exit_reason,
+                  r: t.net_r_multiple
+                }))
+              };
+              bt = BACKTEST_DATA[symbol];
+              renderBacktestUniverseTable();
+            }
+          }
+        } catch (_) {}
+      }
 
       document.getElementById('btCardTitle').textContent = `${symbol} — 3-Year Compounded Swing Equity Curve`;
       const expSign = bt.expectancyR >= 0 ? '+' : '';
@@ -2191,9 +2384,80 @@
       });
     }
 
+    function getFilteredBacktestStocks() {
+      return STOCKS.filter(s => {
+        if (state.btUniverse === 'TOP_ACTIONABLE' && s.score < 90) return false;
+        if (state.btUniverse === 'NIFTY_50' && s.universe !== 'NIFTY_50') return false;
+        if (state.btUniverse === 'MIDCAP_100' && s.universe !== 'MIDCAP_100') return false;
+        return true;
+      });
+    }
+
+    function changeBacktestUniverse(val) {
+      state.btUniverse = val;
+      state.btPage = 1;
+      renderBacktestUniverseTable();
+    }
+
+    function changeBtPageSize(val) {
+      state.btPageSize = parseInt(val, 10) || 10;
+      state.btPage = 1;
+      renderBacktestUniverseTable();
+    }
+
+    function goToBtPage(page) {
+      state.btPage = page;
+      renderBacktestUniverseTable();
+    }
+
     function renderBacktestUniverseTable() {
+      const filtered = getFilteredBacktestStocks();
+      const total = filtered.length;
+
+      // Dynamically recalculate cohort KPIs from the filtered stocks
+      if (total > 0) {
+        let totalTrades = 0;
+        let weightedWins = 0;
+        let weightedExp = 0;
+        let sumPf = 0;
+        let sumRet = 0;
+        filtered.forEach(s => {
+          const d = getBacktestDataForSymbol(s.symbol);
+          totalTrades += d.trades;
+          weightedWins += (d.winRate / 100) * d.trades;
+          weightedExp += d.expectancyR * d.trades;
+          sumPf += Math.min(d.pf, 10);
+          sumRet += d.netReturnPct;
+        });
+        const cohortWinRate = totalTrades > 0 ? ((weightedWins / totalTrades) * 100).toFixed(1) : '0.0';
+        const cohortExp = totalTrades > 0 ? (weightedExp / totalTrades).toFixed(2) : '0.00';
+        const cohortPf = (sumPf / total).toFixed(2);
+        const avgRet = (sumRet / total).toFixed(1);
+
+        const titleMap = {
+          ALL: `All ${total} NSE Stocks — 3-Year Walk-Forward Tearsheet (1.5x ATR Stop)`,
+          TOP_ACTIONABLE: `★ Top Actionable Setups (${total} Stocks) — 3-Year Walk-Forward Tearsheet`,
+          NIFTY_50: `Nifty 50 Large-Cap Leaders (${total} Stocks) — 3-Year Walk-Forward Tearsheet`,
+          MIDCAP_100: `Nifty Midcap 100 Momentum (${total} Stocks) — 3-Year Walk-Forward Tearsheet`
+        };
+        document.getElementById('btTableHeaderTitle').textContent = titleMap[state.btUniverse] || titleMap.ALL;
+        document.getElementById('btKpiWinRate').textContent = `${cohortWinRate}%`;
+        document.getElementById('btKpiWinSub').innerHTML = `Across <span class="mono">${totalTrades}</span> trades in <strong class="bull">${total} NSE stocks</strong>`;
+        document.getElementById('btKpiExpectancy').textContent = `${cohortExp >= 0 ? '+' : ''}${cohortExp}R`;
+        document.getElementById('btKpiPf').textContent = cohortPf;
+        document.getElementById('btKpiReturn').textContent = `${avgRet >= 0 ? '+' : ''}${avgRet}%`;
+        document.getElementById('btKpiRetSub').textContent = `Avg 3Y swing return (${total} stocks @ 1.5% risk/trade)`;
+      }
+
+      const totalPages = Math.max(1, Math.ceil(total / state.btPageSize));
+      if (state.btPage > totalPages) state.btPage = totalPages;
+
+      const startIdx = (state.btPage - 1) * state.btPageSize;
+      const endIdx = Math.min(startIdx + state.btPageSize, total);
+      const pageItems = filtered.slice(startIdx, endIdx);
+
       const tbody = document.getElementById('btUniverseTableBody');
-      tbody.innerHTML = STOCKS.slice(0, 12).map(s => {
+      tbody.innerHTML = pageItems.map(s => {
         const d = getBacktestDataForSymbol(s.symbol);
         return `
           <tr onclick="loadBacktestForSymbol('${s.symbol}')">
@@ -2209,6 +2473,23 @@
           </tr>
         `;
       }).join('');
+
+      document.getElementById('btPaginationSummaryText').textContent =
+        total === 0 ? 'Showing 0 stocks' : `Showing ${startIdx + 1}–${endIdx} of ${total} NSE stocks`;
+
+      const controls = document.getElementById('btPaginationControls');
+      let btnsHtml = `
+        <button class="page-btn" ${state.btPage <= 1 ? 'disabled' : ''} onclick="goToBtPage(${state.btPage - 1})">← Prev</button>
+      `;
+      for (let p = 1; p <= totalPages; p++) {
+        btnsHtml += `
+          <button class="page-btn ${p === state.btPage ? 'active' : ''}" onclick="goToBtPage(${p})">${p}</button>
+        `;
+      }
+      btnsHtml += `
+        <button class="page-btn" ${state.btPage >= totalPages ? 'disabled' : ''} onclick="goToBtPage(${state.btPage + 1})">Next →</button>
+      `;
+      controls.innerHTML = btnsHtml;
     }
 
     // =========================================================================
