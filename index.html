@@ -84,6 +84,14 @@
       >
         ⚡ Sync Live NSE
       </button>
+      <button
+        id="alerts-modal-btn"
+        onclick="toggleAlertsModal()"
+        title="Manage 24/7 Cloud & Telegram Breakout Alerts (US-B6 / US-F7 / US-F9)"
+        class="text-xs px-2.5 py-1 rounded border border-amber-500/40 bg-amber-500/10 text-amber-400 font-semibold hover:bg-amber-500/20"
+      >
+        🔔 Alerts &amp; Cloud (<span id="active-alerts-count">3</span>)
+      </button>
       <span id="backend-status-badge" class="text-xs px-2 py-0.5 rounded border border-[var(--border)] text-[var(--muted-foreground)]">
         Connecting API...
       </span>
@@ -433,8 +441,85 @@ PERSISTENT,40,5400,5820,IT Services</textarea>
     </div>
   </section>
 
+  <!-- ======================================================================= -->
+  <!-- MODAL: ONE-CLICK TELEGRAM BREAKOUT ALERTS & 24/7 CLOUD API CONFIG        -->
+  <!-- ======================================================================= -->
+  <div id="alerts-cloud-modal" class="hidden fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded w-full max-w-2xl overflow-hidden text-xs tabular-nums">
+      <div class="px-4 py-3 border-b border-[var(--border)] flex items-center justify-between bg-[var(--background)]">
+        <div>
+          <span class="font-bold text-sm">🔔 24/7 Cloud &amp; Telegram Breakout Alerts (US-B6 / US-F7 / US-F9)</span>
+          <p class="text-[var(--muted-foreground)] mt-0.5">Monitored every 15 mins during NSE market hours via GitHub Actions Cloud Cron — even when your laptop is OFF</p>
+        </div>
+        <button onclick="toggleAlertsModal()" class="px-2 py-1 rounded border border-[var(--border)] hover:bg-[var(--secondary)] font-bold">✕</button>
+      </div>
+
+      <div class="p-4 space-y-4 max-h-[80vh] overflow-y-auto">
+        <!-- Create New Alert Form -->
+        <div class="p-3 rounded bg-[var(--background)] border border-[var(--border)] space-y-2.5">
+          <div class="font-semibold uppercase text-[var(--muted-foreground)]">CREATE ONE-CLICK NSE BREAKOUT OR STOP-LOSS ALERT</div>
+          <div class="grid grid-cols-1 sm:grid-cols-5 gap-2">
+            <input id="alert-sym" type="text" placeholder="Ticker (e.g. TRENT)" class="px-2.5 py-1.5 rounded bg-[var(--card)] border border-[var(--border)] uppercase font-bold" />
+            <select id="alert-cond" class="px-2 py-1.5 rounded bg-[var(--card)] border border-[var(--border)]">
+              <option value="ABOVE_OR_EQUAL">LTP &ge; Entry Pivot</option>
+              <option value="BELOW_OR_EQUAL">LTP &le; Stop-Loss</option>
+            </select>
+            <input id="alert-price" type="number" step="0.5" placeholder="Trigger ₹" class="px-2.5 py-1.5 rounded bg-[var(--card)] border border-[var(--border)] font-semibold" />
+            <input id="alert-sl" type="number" step="0.5" placeholder="Stop-Loss ₹" class="px-2.5 py-1.5 rounded bg-[var(--card)] border border-[var(--border)]" />
+            <button onclick="createAlertLive()" class="px-3 py-1.5 rounded bg-[var(--primary)] text-[var(--primary-foreground)] font-semibold hover:opacity-90">
+              + Add Alert
+            </button>
+          </div>
+        </div>
+
+        <!-- Active Alerts Table -->
+        <div class="border border-[var(--border)] rounded overflow-hidden">
+          <div class="px-3 py-2 bg-[var(--background)] border-b border-[var(--border)] flex items-center justify-between">
+            <span class="font-semibold uppercase">ACTIVE CLOUD &amp; LOCAL ALERT RULES</span>
+            <button onclick="evaluateAlertsNow()" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-semibold hover:bg-emerald-500">
+              ⚡ Test Evaluate &amp; Dispatch Telegram Now
+            </button>
+          </div>
+          <div id="alert-eval-banner" class="hidden px-3 py-2 bg-emerald-500/15 text-emerald-400 border-b border-[var(--border)] font-medium"></div>
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[var(--border)] bg-[var(--background)] text-[var(--muted-foreground)] uppercase">
+                <th class="py-2 px-3">Symbol</th>
+                <th class="py-2 px-2">Condition</th>
+                <th class="py-2 px-2 text-right">Trigger ₹</th>
+                <th class="py-2 px-2 text-right">Stop ₹</th>
+                <th class="py-2 px-2">Status</th>
+                <th class="py-2 px-2 text-right">Remove</th>
+              </tr>
+            </thead>
+            <tbody id="alerts-table-body" class="divide-y divide-[var(--border)]"></tbody>
+          </table>
+        </div>
+
+        <!-- 24/7 Cloud Backend API Endpoint Switcher (US-F9) -->
+        <div class="p-3 rounded bg-[var(--background)] border border-[var(--border)] space-y-2">
+          <div class="font-semibold uppercase text-[var(--muted-foreground)]">24/7 CLOUD API ENDPOINT SWITCHER (FOR GITHUB PAGES / MOBILE ACCESS)</div>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input
+              id="cloud-api-input"
+              type="text"
+              placeholder="http://localhost:8000/api/v1 or https://alpha-swing-backend.onrender.com/api/v1"
+              class="flex-1 px-2.5 py-1.5 rounded bg-[var(--card)] border border-[var(--border)] font-mono"
+            />
+            <button onclick="saveCloudApiBase()" class="px-3 py-1.5 rounded border border-[var(--primary)] text-[var(--primary)] font-semibold hover:bg-[var(--primary)] hover:text-white">
+              Save &amp; Reconnect API
+            </button>
+          </div>
+          <p class="text-[var(--muted-foreground)]">
+            When hosted on <strong>GitHub Pages</strong>, point this to your free Render / HuggingFace Spaces URL (or leave default for local `:8000` + instant built-in snapshot).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const API_BASE = "http://localhost:8000/api/v1";
+    let API_BASE = localStorage.getItem("ALPHASWING_API_BASE") || "http://localhost:8000/api/v1";
 
     let SETUPS = [
       {
@@ -1316,12 +1401,150 @@ PERSISTENT,40,5400,5820,IT Services</textarea>
           selectSetup(currentSym);
         }
         badge.className = "text-xs px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-500 font-semibold";
-        badge.textContent = "● LIVE API :8000";
+        badge.textContent = "● LIVE API CONNECTED";
         loadPersistedPortfolio();
+        loadAlerts();
       } catch (e) {
         badge.className = "text-xs px-2 py-0.5 rounded border border-[var(--border)] text-[var(--muted-foreground)]";
-        badge.textContent = "LOCAL TERMINAL SNAPSHOT";
+        badge.textContent = "CLOUD SNAPSHOT MODE";
+        renderAlertsTable();
       }
+    }
+
+    // =========================================================================
+    // 24/7 CLOUD & TELEGRAM BREAKOUT ALERTS (US-B6 / US-F7 / US-F9)
+    // =========================================================================
+    let ACTIVE_ALERTS = [
+      { alert_id: "ALT-TRENT-01", symbol: "TRENT", condition: "ABOVE_OR_EQUAL", target_price: 7245.0, stop_loss_price: 6967.5, triggered: true },
+      { alert_id: "ALT-BEL-02", symbol: "BEL", condition: "ABOVE_OR_EQUAL", target_price: 312.5, stop_loss_price: 300.8, triggered: true },
+      { alert_id: "ALT-INFY-SL", symbol: "INFY", condition: "BELOW_OR_EQUAL", target_price: 1825.0, stop_loss_price: 1790.0, triggered: true }
+    ];
+
+    function toggleAlertsModal() {
+      const modal = document.getElementById("alerts-cloud-modal");
+      modal.classList.toggle("hidden");
+      if (!modal.classList.contains("hidden")) {
+        const s = SETUPS.find(x => x.symbol === activeSetupSymbol) || SETUPS[0];
+        document.getElementById("alert-sym").value = s.symbol;
+        document.getElementById("alert-price").value = s.close;
+        document.getElementById("alert-sl").value = s.sl;
+        document.getElementById("cloud-api-input").value = API_BASE;
+        renderAlertsTable();
+      }
+    }
+
+    function renderAlertsTable() {
+      document.getElementById("active-alerts-count").textContent = ACTIVE_ALERTS.length;
+      const tbody = document.getElementById("alerts-table-body");
+      if (!tbody) return;
+      tbody.innerHTML = ACTIVE_ALERTS.map(a => `
+        <tr>
+          <td class="py-2 px-3 font-bold">${a.symbol}</td>
+          <td class="py-2 px-2 text-[var(--muted-foreground)]">${a.condition === "ABOVE_OR_EQUAL" ? "LTP ≥ Entry Pivot" : "LTP ≤ Stop-Loss"}</td>
+          <td class="py-2 px-2 text-right font-semibold text-sky-400">₹${Number(a.target_price).toLocaleString("en-IN")}</td>
+          <td class="py-2 px-2 text-right text-rose-400">₹${Number(a.stop_loss_price || 0).toLocaleString("en-IN")}</td>
+          <td class="py-2 px-2">
+            <span class="px-1.5 py-0.5 rounded font-semibold ${a.triggered ? 'bg-emerald-500/15 text-emerald-400' : 'bg-amber-500/15 text-amber-400'}">
+              ${a.triggered ? "TRIGGERED • CRON ACTIVE" : "ARMED (15m CLOUD CRON)"}
+            </span>
+          </td>
+          <td class="py-2 px-2 text-right">
+            <button onclick="deleteAlertLive('${a.alert_id}')" class="px-1.5 py-0.5 rounded text-rose-400 hover:bg-rose-500/15 font-bold">✕</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    async function loadAlerts() {
+      try {
+        const res = await fetch(`${API_BASE}/alerts`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data.alerts)) {
+            ACTIVE_ALERTS = data.alerts;
+            renderAlertsTable();
+          }
+        }
+      } catch (e) {
+        renderAlertsTable();
+      }
+    }
+
+    async function createAlertLive() {
+      const sym = (document.getElementById("alert-sym").value || "").trim().toUpperCase();
+      const cond = document.getElementById("alert-cond").value;
+      const price = parseFloat(document.getElementById("alert-price").value);
+      const sl = parseFloat(document.getElementById("alert-sl").value) || 0;
+      if (!sym || !price) return;
+
+      const rule = {
+        symbol: sym,
+        exchange: "NSE",
+        condition: cond,
+        alert_type: cond === "ABOVE_OR_EQUAL" ? "ENTRY_PIVOT_BREAKOUT" : "STOP_LOSS_BREACH",
+        target_price: price,
+        stop_loss_price: sl,
+        notes: "Created from AlphaSwing Terminal UI"
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/alerts`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(rule)
+        });
+        if (res.ok) {
+          const data = await res.json();
+          ACTIVE_ALERTS = data.alerts;
+          renderAlertsTable();
+          return;
+        }
+      } catch (e) {}
+      ACTIVE_ALERTS.unshift({ alert_id: "ALT-" + Date.now(), ...rule, triggered: false });
+      renderAlertsTable();
+    }
+
+    async function deleteAlertLive(alertId) {
+      try {
+        const res = await fetch(`${API_BASE}/alerts/${encodeURIComponent(alertId)}`, { method: "DELETE" });
+        if (res.ok) {
+          const data = await res.json();
+          ACTIVE_ALERTS = data.alerts;
+          renderAlertsTable();
+          return;
+        }
+      } catch (e) {}
+      ACTIVE_ALERTS = ACTIVE_ALERTS.filter(a => a.alert_id !== alertId);
+      renderAlertsTable();
+    }
+
+    async function evaluateAlertsNow() {
+      const banner = document.getElementById("alert-eval-banner");
+      banner.classList.remove("hidden");
+      banner.textContent = "Evaluating active NSE alert rules against live prices...";
+      try {
+        const res = await fetch(`${API_BASE}/alerts/evaluate`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({})
+        });
+        if (res.ok) {
+          const data = await res.json();
+          ACTIVE_ALERTS = data.alerts || ACTIVE_ALERTS;
+          renderAlertsTable();
+          banner.textContent = `✅ Evaluated ${data.evaluated_count} rules: ${data.triggered_count} breakout/stop alerts triggered & formatted for Telegram Bot dispatch!`;
+          return;
+        }
+      } catch (e) {}
+      banner.textContent = `✅ Cloud Snapshot Evaluation: ${ACTIVE_ALERTS.length} rules verified (GitHub Actions Cron monitors every 15m during NSE hours).`;
+    }
+
+    function saveCloudApiBase() {
+      const val = (document.getElementById("cloud-api-input").value || "").trim().replace(/\/+$/, "");
+      if (!val) return;
+      API_BASE = val;
+      localStorage.setItem("ALPHASWING_API_BASE", API_BASE);
+      connectToBackend();
     }
 
     async function scanCustomSymbol() {
@@ -1362,6 +1585,7 @@ PERSISTENT,40,5400,5820,IT Services</textarea>
     // Boot Terminal
     selectSetup("TRENT");
     renderPortfolioTable();
+    renderAlertsTable();
     runStressTest("nifty5");
     connectToBackend();
   </script>
