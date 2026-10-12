@@ -1512,7 +1512,7 @@
     // 1. EXPANDED 32-STOCK NSE UNIVERSE WITH AI VERDICTS & CONCALL HIGHLIGHTS
     // =========================================================================
     const STOCKS = [
-      { symbol: 'CUMMINSIND', name: 'Cummins India Ltd', sector: 'Capital Goods', universe: 'MIDCAP_100', price: 3842.50, change: 3.12, trigger: 3855.00, atr: 68.00, atrPct: 1.77, rsi: 66.2, rvol: 2.8, rs6m: 24.1, score: 96, aiScore: 93, setup: 'Pocket Pivot', preset: ['vcp', 'pocket', 'stage2'],
+      { symbol: 'CUMMINSIND', name: 'Cummins India Ltd', sector: 'Capital Goods', universe: 'MIDCAP_100', exchange: 'NSE', price: 4835.00, change: 0.10, trigger: 4964.30, atr: 112.94, atrPct: 2.34, rsi: 66.2, rvol: 2.8, rs6m: 24.1, score: 96, aiScore: 93, setup: 'Pocket Pivot', preset: ['vcp', 'pocket', 'stage2'],
         aiSummary: 'Hyperscale data-center backup power demand driving record high-kVA generator margins. #1 ranked stock in our 3-year walk-forward backtest (83.3% Win Rate, 8.35 Profit Factor).',
         bullCatalysts: [
           'Data center high-horsepower (HHP) genset revenue up +42% YoY with 210 bps gross margin expansion.',
@@ -1521,14 +1521,14 @@
         ],
         riskFlags: [
           'Export recovery in Europe/Latin America remains gradual; monitor Q4 export run-rate.',
-          'Trading at 46x forward P/E — avoid chasing if opening >3% above ₹3,855 trigger.'
+          'Trading at 56.6x P/E — avoid chasing if opening >3% above ₹4,964.30 trigger.'
         ],
         filings: [
           { tag: 'CONCALL TRANSCRIPT', title: 'Q2/Q3 Earnings Call — Data Center & CPCB-IV+ Demand', summary: 'Management guided for sustained double-digit volume growth backed by hyperscale cloud data center commissioning across Mumbai, Hyderabad, and Chennai.' },
           { tag: 'BSE INSTITUTIONAL FILING', title: 'Domestic Mutual Fund Accumulation', summary: 'Institutional delivery percentage averaged 61.4% over the last 10 trading sessions during tight 20-EMA base consolidation.' }
         ]
       },
-      { symbol: 'HAL', name: 'Hindustan Aeronautics Ltd', sector: 'Aerospace & Defense', universe: 'NIFTY_50', price: 4185.00, change: 2.45, trigger: 4195.00, atr: 86.00, atrPct: 2.05, rsi: 63.8, rvol: 2.4, rs6m: 18.4, score: 94, aiScore: 91, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'],
+      { symbol: 'HAL', name: 'Hindustan Aeronautics Ltd', sector: 'Aerospace & Defense', universe: 'NIFTY_50', exchange: 'NSE', price: 4760.00, change: 2.24, trigger: 4837.10, atr: 104.56, atrPct: 2.20, rsi: 63.8, rvol: 2.4, rs6m: 18.4, score: 94, aiScore: 91, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'],
         aiSummary: 'Record ₹94,000 Cr defense order book visibility with strong Q3 operating leverage. Tight 4-week volatility contraction right above rising 20-EMA.',
         bullCatalysts: [
           'Executable order book at ~3.2x TTM revenue (₹94,000+ Cr) with LCA Tejas Mk1A & LCH Prachand ramp-up.',
@@ -1544,7 +1544,7 @@
           { tag: 'NSE EXCHANGE FILING', title: 'Cabinet Committee Clears Helicopter Batch', summary: 'Indigenous content increase driving 180 bps YoY operating margin expansion.' }
         ]
       },
-      { symbol: 'BSE', name: 'BSE Limited', sector: 'Capital Markets', universe: 'MIDCAP_100', price: 5420.00, change: 3.45, trigger: 5460.00, atr: 118.00, atrPct: 2.18, rsi: 68.1, rvol: 2.9, rs6m: 38.5, score: 95, aiScore: 92, setup: 'Stage-2 Breakout', preset: ['pocket', 'stage2'],
+      { symbol: 'BSE', name: 'BSE Limited', sector: 'Capital Markets', universe: 'MIDCAP_100', exchange: 'NSE', price: 3330.20, change: 1.31, trigger: 3389.00, atr: 96.83, atrPct: 2.91, rsi: 68.1, rvol: 2.9, rs6m: 38.5, score: 95, aiScore: 92, setup: 'Stage-2 Breakout', preset: ['pocket', 'stage2'],
         aiSummary: 'Equity derivatives market share expansion and StAR MF transaction fee surge driving 50%+ operating margin leverage.',
         bullCatalysts: [
           'Sensex & Bankex index options market share crossed 26% with rising clearing & transaction realization.',
@@ -1559,7 +1559,7 @@
           { tag: 'CONCALL TRANSCRIPT', title: 'Derivatives & StAR MF Operating Leverage', summary: 'Colocation rack capacity expansion fully subscribed by institutional HFT and proprietary desks.' }
         ]
       },
-      { symbol: 'TRENT', name: 'Trent Ltd (Tata Group)', sector: 'Retail / Consumer', universe: 'NIFTY_50', price: 7140.00, change: 2.80, trigger: 7180.00, atr: 155.00, atrPct: 2.17, rsi: 67.4, rvol: 2.2, rs6m: 31.5, score: 93, aiScore: 90, setup: 'Stage-2 Breakout', preset: ['pocket', 'stage2'],
+      { symbol: 'TRENT', name: 'Trent Ltd (Tata Group)', sector: 'Retail / Consumer', universe: 'NIFTY_50', exchange: 'NSE', price: 2913.00, change: -0.18, trigger: 2966.00, atr: 65.25, atrPct: 2.24, rsi: 61.4, rvol: 2.2, rs6m: 31.5, score: 93, aiScore: 90, setup: 'Stage-2 Breakout', preset: ['pocket', 'stage2'],
         aiSummary: 'Zudio store footprint expansion continues to deliver industry-best same-store sales growth (LFL > 15%). Clean 20-EMA bounce.',
         bullCatalysts: [
           'Zudio crossed 580+ stores pan-India with industry-leading revenue per sq. ft.',
@@ -1567,49 +1567,49 @@
           '66.7% 3-Year Walk-Forward Win Rate with +0.72R mathematical expectancy.'
         ],
         riskFlags: [
-          'Trading at premium valuation (>110x P/E); sensitive to any quarterly moderation in store additions.'
+          'Trading at premium valuation; sensitive to any quarterly moderation in store additions.'
         ],
         filings: [
           { tag: 'CONCALL TRANSCRIPT', title: 'Q2/Q3 Retail Footprint & LFL Update', summary: 'Added 42 net new Zudio stores across Tier-2/3 cities; Like-for-Like (LFL) growth remained >14% YoY.' }
         ]
       },
-      { symbol: 'POLYCAB', name: 'Polycab India Ltd', sector: 'Industrials / Cables', universe: 'MIDCAP_100', price: 6720.00, change: 1.95, trigger: 6750.00, atr: 132.00, atrPct: 1.96, rsi: 61.5, rvol: 1.9, rs6m: 19.8, score: 92, aiScore: 88, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'Strong grid transmission & real estate wire demand with industry-leading RoCE (28%+). 66.7% 3-Year Walk-Forward Win Rate.' },
-      { symbol: 'M&M', name: 'Mahindra & Mahindra Ltd', sector: 'Automobiles', universe: 'NIFTY_50', price: 3045.00, change: 2.20, trigger: 3065.00, atr: 58.00, atrPct: 1.90, rsi: 64.5, rvol: 2.1, rs6m: 22.8, score: 92, aiScore: 90, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'SUV order backlog and tractor cycle recovery driving consistent institutional accumulation along the 20-day EMA.' },
-      { symbol: 'CDSL', name: 'Central Depository Services', sector: 'Capital Markets', universe: 'MIDCAP_100', price: 1785.00, change: 2.65, trigger: 1800.00, atr: 36.00, atrPct: 2.02, rsi: 65.4, rvol: 2.5, rs6m: 29.4, score: 91, aiScore: 89, setup: 'Pocket Pivot', preset: ['vcp', 'pocket', 'stage2'], aiSummary: 'Demat account additions and annuity issuer charges provide high free-cash-flow conversion with zero debt.' },
-      { symbol: 'DIXON', name: 'Dixon Technologies (India)', sector: 'EMS / Electronics', universe: 'MIDCAP_100', price: 14820.00, change: 1.74, trigger: 14890.00, atr: 310.00, atrPct: 2.09, rsi: 62.1, rvol: 1.8, rs6m: 27.6, score: 91, aiScore: 87, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'PLI mobile & IT hardware export ramp-up driving multi-quarter revenue visibility. 60.0% 3Y backtest win rate.' },
-      { symbol: 'SUNPHARMA', name: 'Sun Pharmaceutical Industries', sector: 'Pharmaceuticals', universe: 'NIFTY_50', price: 1892.00, change: 1.25, trigger: 1905.00, atr: 28.50, atrPct: 1.51, rsi: 59.4, rvol: 1.7, rs6m: 14.9, score: 90, aiScore: 86, setup: 'Low-Beta VCP', preset: ['vcp', 'stage2'], aiSummary: 'Global specialty dermatology & ophthalmology portfolio driving steady margin expansion. 71.4% 3-Year Walk-Forward Win Rate.' },
-      { symbol: 'ABB', name: 'ABB India Ltd', sector: 'Industrial Automation', universe: 'MIDCAP_100', price: 8240.00, change: 2.05, trigger: 8290.00, atr: 162.00, atrPct: 1.97, rsi: 62.8, rvol: 1.9, rs6m: 20.5, score: 90, aiScore: 88, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'Railway electrification, robotics, and process automation orders driving strong margin expansion.' },
-      { symbol: 'ICICIBANK', name: 'ICICI Bank Ltd', sector: 'Private Banking', universe: 'NIFTY_50', price: 1312.00, change: 1.40, trigger: 1320.00, atr: 21.00, atrPct: 1.60, rsi: 61.2, rvol: 1.8, rs6m: 15.6, score: 89, aiScore: 88, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'Best-in-class RoA (2.4%) and pristine asset quality among Indian private banks; tight institutional base above 20-EMA.' },
-      { symbol: 'BHARTIARTL', name: 'Bharti Airtel Ltd', sector: 'Telecom', universe: 'NIFTY_50', price: 1688.00, change: 1.85, trigger: 1700.00, atr: 27.50, atrPct: 1.63, rsi: 63.1, rvol: 1.9, rs6m: 21.2, score: 89, aiScore: 89, setup: 'Stage-2 Breakout', preset: ['vcp', 'stage2'], aiSummary: 'ARPU tariff flow-through and declining 5G capex intensity driving record free cash flow generation & deleveraging.' },
-      { symbol: 'LT', name: 'Larsen & Toubro Ltd', sector: 'EPC & Infrastructure', universe: 'NIFTY_50', price: 3765.00, change: 1.55, trigger: 3790.00, atr: 64.00, atrPct: 1.70, rsi: 59.8, rvol: 1.7, rs6m: 13.8, score: 87, aiScore: 86, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: '₹5+ Lakh Cr order book across Middle East hydrocarbon & domestic infrastructure with improving working capital intensity.' },
-      { symbol: 'SBIN', name: 'State Bank of India', sector: 'PSU Banking', universe: 'NIFTY_50', price: 842.00, change: 1.90, trigger: 850.00, atr: 16.50, atrPct: 1.96, rsi: 60.5, rvol: 2.0, rs6m: 14.2, score: 87, aiScore: 85, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'Strong credit growth and multi-year low gross NPA ratio supporting sustained RoE above 18%.' },
-      { symbol: 'RELIANCE', name: 'Reliance Industries Ltd', sector: 'Energy & Retail', universe: 'NIFTY_50', price: 2965.00, change: 1.15, trigger: 2985.00, atr: 46.00, atrPct: 1.55, rsi: 58.2, rvol: 1.6, rs6m: 11.4, score: 86, aiScore: 85, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: 'Jio tariff hike realization and New Energy gigafactory commissioning milestones supporting institutional accumulation.' },
-      { symbol: 'TATAMOTORS', name: 'Tata Motors Ltd', sector: 'Automobiles', universe: 'NIFTY_50', price: 985.00, change: 1.68, trigger: 996.00, atr: 21.00, atrPct: 2.13, rsi: 57.9, rvol: 1.8, rs6m: 12.6, score: 85, aiScore: 83, setup: 'Pocket Pivot', preset: ['pocket'], aiSummary: 'JLR net-debt-free milestone and domestic EV/commercial vehicle free cash flow generation.' },
-      { symbol: 'BAJFINANCE', name: 'Bajaj Finance Ltd', sector: 'NBFC / Financials', universe: 'NIFTY_50', price: 7380.00, change: 1.45, trigger: 7430.00, atr: 135.00, atrPct: 1.83, rsi: 58.6, rvol: 1.7, rs6m: 10.9, score: 85, aiScore: 84, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: '26% AUM growth with stabilizing credit costs and digital omnichannel loan origination scale.' },
-      { symbol: 'NTPC', name: 'NTPC Limited', sector: 'Power & Utilities', universe: 'NIFTY_50', price: 422.00, change: 2.10, trigger: 426.00, atr: 8.20, atrPct: 1.94, rsi: 64.2, rvol: 2.1, rs6m: 19.5, score: 88, aiScore: 86, setup: 'Stage-2 Breakout', preset: ['vcp', 'stage2'], aiSummary: 'Peak power demand and NGEL renewable subsidiary capacity additions driving steady regulated RoE.' },
-      { symbol: 'POWERGRID', name: 'Power Grid Corp of India', sector: 'Power Transmission', universe: 'NIFTY_50', price: 344.00, change: 1.75, trigger: 348.00, atr: 6.40, atrPct: 1.86, rsi: 62.0, rvol: 1.8, rs6m: 17.8, score: 87, aiScore: 85, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: '₹1.8 Lakh Cr interstate green energy corridor TBCB transmission project pipeline.' },
-      { symbol: 'TITAN', name: 'Titan Company Ltd', sector: 'Consumer / Jewellery', universe: 'NIFTY_50', price: 3640.00, change: 1.30, trigger: 3670.00, atr: 62.00, atrPct: 1.70, rsi: 59.1, rvol: 1.6, rs6m: 12.1, score: 85, aiScore: 84, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: 'Custom duty cut boost to festive gold jewellery volumes and CaratLane studded mix expansion.' },
-      { symbol: 'TCS', name: 'Tata Consultancy Services', sector: 'IT Services', universe: 'NIFTY_50', price: 4320.00, change: 1.10, trigger: 4350.00, atr: 68.00, atrPct: 1.57, rsi: 58.4, rvol: 1.5, rs6m: 11.8, score: 84, aiScore: 83, setup: 'Low-Beta VCP', preset: ['vcp'], aiSummary: 'US BFSI green shoots and strong $10B+ quarterly TCV book-to-bill ratio.' },
-      { symbol: 'INFY', name: 'Infosys Limited', sector: 'IT Services', universe: 'NIFTY_50', price: 1915.00, change: 1.48, trigger: 1930.00, atr: 31.00, atrPct: 1.62, rsi: 61.0, rvol: 1.7, rs6m: 15.4, score: 86, aiScore: 85, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'Upward FY revenue guidance revision and generative AI enterprise deal ramp-up.' },
-      { symbol: 'PERSISTENT', name: 'Persistent Systems Ltd', sector: 'IT Services', universe: 'MIDCAP_100', price: 5460.00, change: 2.10, trigger: 5490.00, atr: 112.00, atrPct: 2.05, rsi: 64.0, rvol: 2.0, rs6m: 16.8, score: 88, aiScore: 86, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'Leading mid-tier IT digital engineering compounder with $500M+ TCV deal bookings.' },
-      { symbol: 'BEL', name: 'Bharat Electronics Ltd', sector: 'Aerospace & Defense', universe: 'MIDCAP_100', price: 294.50, change: 1.65, trigger: 296.50, atr: 6.40, atrPct: 2.17, rsi: 60.8, rvol: 2.1, rs6m: 15.2, score: 86, aiScore: 85, setup: 'VCP Tight Base', preset: ['vcp', 'pocket'], aiSummary: 'Defense electronics & radar order pipeline remains robust. Use 2.0x ATR wider stop on PSU Defense stocks.' },
-      { symbol: 'MCX', name: 'Multi Commodity Exchange', sector: 'Capital Markets', universe: 'MIDCAP_100', price: 6280.00, change: 2.90, trigger: 6320.00, atr: 138.00, atrPct: 2.20, rsi: 66.8, rvol: 2.4, rs6m: 33.2, score: 89, aiScore: 88, setup: 'Stage-2 Breakout', preset: ['pocket', 'stage2'], aiSummary: 'Commodity options Average Daily Turnover (ADT) hitting record highs after new tech platform transition.' },
-      { symbol: 'SIEMENS', name: 'Siemens Limited', sector: 'Capital Goods', universe: 'MIDCAP_100', price: 7190.00, change: 1.85, trigger: 7240.00, atr: 145.00, atrPct: 2.02, rsi: 62.4, rvol: 1.8, rs6m: 21.0, score: 88, aiScore: 87, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'Energy demerger value unlocking and HVDC transmission equipment order inflows.' },
-      { symbol: 'KAYNES', name: 'Kaynes Technology India', sector: 'EMS / Semicon', universe: 'MIDCAP_100', price: 5640.00, change: 3.15, trigger: 5690.00, atr: 135.00, atrPct: 2.39, rsi: 66.5, rvol: 2.3, rs6m: 34.0, score: 89, aiScore: 88, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'High-margin industrial & aerospace PCB assembly order book plus OSAT semiconductor approval.' },
-      { symbol: 'KPITTECH', name: 'KPIT Technologies Ltd', sector: 'Auto ER&D Software', universe: 'MIDCAP_100', price: 1645.00, change: 2.05, trigger: 1665.00, atr: 36.00, atrPct: 2.19, rsi: 61.8, rvol: 1.9, rs6m: 16.2, score: 86, aiScore: 85, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: 'Global OEM software-defined vehicle (SDV) middleware programs driving 20%+ CC growth.' },
-      { symbol: 'MAZDOCK', name: 'Mazagon Dock Shipbuilders', sector: 'Defense Shipbuilding', universe: 'MIDCAP_100', price: 4420.00, change: 2.75, trigger: 4460.00, atr: 112.00, atrPct: 2.53, rsi: 63.4, rvol: 2.2, rs6m: 26.4, score: 87, aiScore: 85, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'Next-gen destroyer & submarine order pipeline providing multi-year execution visibility.' },
-      { symbol: 'COCHINSHIP', name: 'Cochin Shipyard Ltd', sector: 'Defense Shipbuilding', universe: 'MIDCAP_100', price: 1840.00, change: 2.40, trigger: 1865.00, atr: 46.00, atrPct: 2.50, rsi: 60.9, rvol: 2.0, rs6m: 22.1, score: 85, aiScore: 83, setup: 'Stage-2 Breakout', preset: ['stage2'], aiSummary: 'European hybrid vessel export contracts and naval ship repair dock expansion.' },
-      { symbol: 'ZOMATO', name: 'Zomato Limited', sector: 'Consumer Tech', universe: 'MIDCAP_100', price: 278.50, change: 2.60, trigger: 282.00, atr: 6.10, atrPct: 2.19, rsi: 65.8, rvol: 2.5, rs6m: 32.8, score: 89, aiScore: 88, setup: 'Stage-2 Breakout', preset: ['vcp', 'pocket', 'stage2'], aiSummary: 'Blinkit quick-commerce dark store expansion and rising food delivery contribution margins.' },
-      { symbol: 'LUPIN', name: 'Lupin Limited', sector: 'Pharmaceuticals', universe: 'MIDCAP_100', exchange: 'NSE', price: 2195.00, change: 1.60, trigger: 2215.00, atr: 39.00, atrPct: 1.78, rsi: 62.2, rvol: 1.8, rs6m: 20.4, score: 88, aiScore: 86, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'US complex respiratory & inhalation generic launches driving EBITDA margin above 22%.' },
+      { symbol: 'POLYCAB', name: 'Polycab India Ltd', sector: 'Industrials / Cables', universe: 'MIDCAP_100', exchange: 'NSE', price: 8405.00, change: 1.82, trigger: 8469.00, atr: 175.00, atrPct: 2.08, rsi: 64.5, rvol: 1.9, rs6m: 19.8, score: 92, aiScore: 88, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'Strong grid transmission & real estate wire demand with industry-leading RoCE (28%+). 66.7% 3-Year Walk-Forward Win Rate.' },
+      { symbol: 'M&M', name: 'Mahindra & Mahindra Ltd', sector: 'Automobiles', universe: 'NIFTY_50', exchange: 'NSE', price: 2813.00, change: 0.60, trigger: 3019.90, atr: 55.90, atrPct: 1.99, rsi: 64.5, rvol: 2.1, rs6m: 22.8, score: 92, aiScore: 90, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'SUV order backlog and tractor cycle recovery driving consistent institutional accumulation along the 20-day EMA.' },
+      { symbol: 'CDSL', name: 'Central Depository Services', sector: 'Capital Markets', universe: 'MIDCAP_100', exchange: 'NSE', price: 1266.00, change: 0.48, trigger: 1318.00, atr: 27.20, atrPct: 2.15, rsi: 65.4, rvol: 2.5, rs6m: 29.4, score: 91, aiScore: 89, setup: 'Pocket Pivot', preset: ['vcp', 'pocket', 'stage2'], aiSummary: 'Demat account additions and annuity issuer charges provide high free-cash-flow conversion with zero debt.' },
+      { symbol: 'DIXON', name: 'Dixon Technologies (India)', sector: 'EMS / Electronics', universe: 'MIDCAP_100', exchange: 'NSE', price: 12660.00, change: -0.89, trigger: 13766.00, atr: 345.14, atrPct: 2.73, rsi: 62.1, rvol: 1.8, rs6m: 27.6, score: 91, aiScore: 87, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'PLI mobile & IT hardware export ramp-up driving multi-quarter revenue visibility. 60.0% 3Y backtest win rate.' },
+      { symbol: 'SUNPHARMA', name: 'Sun Pharmaceutical Industries', sector: 'Pharmaceuticals', universe: 'NIFTY_50', exchange: 'NSE', price: 1760.00, change: 0.00, trigger: 1865.00, atr: 31.34, atrPct: 1.78, rsi: 59.4, rvol: 1.7, rs6m: 14.9, score: 90, aiScore: 86, setup: 'Low-Beta VCP', preset: ['vcp', 'stage2'], aiSummary: 'Global specialty dermatology & ophthalmology portfolio driving steady margin expansion. 71.4% 3-Year Walk-Forward Win Rate.' },
+      { symbol: 'ABB', name: 'ABB India Ltd', sector: 'Industrial Automation', universe: 'MIDCAP_100', exchange: 'NSE', price: 6855.50, change: 1.11, trigger: 7140.50, atr: 188.61, atrPct: 2.75, rsi: 62.8, rvol: 1.9, rs6m: 20.5, score: 90, aiScore: 88, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'Railway electrification, robotics, and process automation orders driving strong margin expansion.' },
+      { symbol: 'ICICIBANK', name: 'ICICI Bank Ltd', sector: 'Private Banking', universe: 'NIFTY_50', exchange: 'NSE', price: 1340.00, change: -1.11, trigger: 1360.80, atr: 22.12, atrPct: 1.65, rsi: 61.2, rvol: 1.8, rs6m: 15.6, score: 89, aiScore: 88, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'Best-in-class RoA (2.4%) and pristine asset quality among Indian private banks; tight institutional base above 20-EMA.' },
+      { symbol: 'BHARTIARTL', name: 'Bharti Airtel Ltd', sector: 'Telecom', universe: 'NIFTY_50', exchange: 'NSE', price: 1778.70, change: -1.46, trigger: 1854.70, atr: 32.30, atrPct: 1.82, rsi: 63.1, rvol: 1.9, rs6m: 21.2, score: 89, aiScore: 89, setup: 'Stage-2 Breakout', preset: ['vcp', 'stage2'], aiSummary: 'ARPU tariff flow-through and declining 5G capex intensity driving record free cash flow generation & deleveraging.' },
+      { symbol: 'LT', name: 'Larsen & Toubro Ltd', sector: 'EPC & Infrastructure', universe: 'NIFTY_50', exchange: 'NSE', price: 3627.50, change: -2.05, trigger: 3858.20, atr: 70.58, atrPct: 1.95, rsi: 59.8, rvol: 1.7, rs6m: 13.8, score: 87, aiScore: 86, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: '₹5+ Lakh Cr order book across Middle East hydrocarbon & domestic infrastructure with improving working capital intensity.' },
+      { symbol: 'SBIN', name: 'State Bank of India', sector: 'PSU Banking', universe: 'NIFTY_50', exchange: 'NSE', price: 941.00, change: -1.89, trigger: 982.50, atr: 16.93, atrPct: 1.80, rsi: 60.5, rvol: 2.0, rs6m: 14.2, score: 87, aiScore: 85, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'Strong credit growth and multi-year low gross NPA ratio supporting sustained RoE above 18%.' },
+      { symbol: 'RELIANCE', name: 'Reliance Industries Ltd', sector: 'Energy & Retail', universe: 'NIFTY_50', exchange: 'NSE', price: 1158.90, change: -0.97, trigger: 1220.80, atr: 21.50, atrPct: 1.86, rsi: 58.2, rvol: 1.6, rs6m: 11.4, score: 86, aiScore: 85, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: 'Jio tariff hike realization and New Energy gigafactory commissioning milestones supporting institutional accumulation.' },
+      { symbol: 'TATAMOTORS', name: 'Tata Motors Ltd (TMPV)', sector: 'Automobiles', universe: 'NIFTY_50', exchange: 'NSE', price: 284.45, change: 1.63, trigger: 291.20, atr: 7.62, atrPct: 2.68, rsi: 57.9, rvol: 1.8, rs6m: 12.6, score: 85, aiScore: 83, setup: 'Pocket Pivot', preset: ['pocket'], aiSummary: 'JLR net-debt-free milestone and domestic EV/commercial vehicle free cash flow generation.' },
+      { symbol: 'BAJFINANCE', name: 'Bajaj Finance Ltd', sector: 'NBFC / Financials', universe: 'NIFTY_50', exchange: 'NSE', price: 957.25, change: -0.29, trigger: 995.80, atr: 22.75, atrPct: 2.38, rsi: 58.6, rvol: 1.7, rs6m: 10.9, score: 85, aiScore: 84, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: '26% AUM growth with stabilizing credit costs and digital omnichannel loan origination scale.' },
+      { symbol: 'NTPC', name: 'NTPC Limited', sector: 'Power & Utilities', universe: 'NIFTY_50', exchange: 'NSE', price: 310.00, change: -0.64, trigger: 326.60, atr: 5.76, atrPct: 1.86, rsi: 64.2, rvol: 2.1, rs6m: 19.5, score: 88, aiScore: 86, setup: 'Stage-2 Breakout', preset: ['vcp', 'stage2'], aiSummary: 'Peak power demand and NGEL renewable subsidiary capacity additions driving steady regulated RoE.' },
+      { symbol: 'POWERGRID', name: 'Power Grid Corp of India', sector: 'Power Transmission', universe: 'NIFTY_50', exchange: 'NSE', price: 249.00, change: -0.06, trigger: 269.90, atr: 5.17, atrPct: 2.08, rsi: 62.0, rvol: 1.8, rs6m: 17.8, score: 87, aiScore: 85, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: '₹1.8 Lakh Cr interstate green energy corridor TBCB transmission project pipeline.' },
+      { symbol: 'TITAN', name: 'Titan Company Ltd', sector: 'Consumer / Jewellery', universe: 'NIFTY_50', exchange: 'NSE', price: 4400.00, change: -0.23, trigger: 4881.00, atr: 95.92, atrPct: 2.18, rsi: 59.1, rvol: 1.6, rs6m: 12.1, score: 85, aiScore: 84, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: 'Custom duty cut boost to festive gold jewellery volumes and CaratLane studded mix expansion.' },
+      { symbol: 'TCS', name: 'Tata Consultancy Services', sector: 'IT Services', universe: 'NIFTY_50', exchange: 'NSE', price: 2125.00, change: -1.44, trigger: 2204.00, atr: 54.19, atrPct: 2.55, rsi: 58.4, rvol: 1.5, rs6m: 11.8, score: 84, aiScore: 83, setup: 'Low-Beta VCP', preset: ['vcp'], aiSummary: 'US BFSI green shoots and strong $10B+ quarterly TCV book-to-bill ratio.' },
+      { symbol: 'INFY', name: 'Infosys Limited', sector: 'IT Services', universe: 'NIFTY_50', exchange: 'NSE', price: 1020.00, change: -0.33, trigger: 1052.30, atr: 24.06, atrPct: 2.36, rsi: 61.0, rvol: 1.7, rs6m: 15.4, score: 86, aiScore: 85, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'Upward FY revenue guidance revision and generative AI enterprise deal ramp-up.' },
+      { symbol: 'PERSISTENT', name: 'Persistent Systems Ltd', sector: 'IT Services', universe: 'MIDCAP_100', exchange: 'NSE', price: 5787.00, change: 0.29, trigger: 5830.00, atr: 158.86, atrPct: 2.75, rsi: 64.0, rvol: 2.0, rs6m: 16.8, score: 88, aiScore: 86, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'Leading mid-tier IT digital engineering compounder with $500M+ TCV deal bookings.' },
+      { symbol: 'BEL', name: 'Bharat Electronics Ltd', sector: 'Aerospace & Defense', universe: 'MIDCAP_100', exchange: 'NSE', price: 373.90, change: 1.56, trigger: 393.45, atr: 7.06, atrPct: 1.89, rsi: 60.8, rvol: 2.1, rs6m: 15.2, score: 86, aiScore: 85, setup: 'VCP Tight Base', preset: ['vcp', 'pocket'], aiSummary: 'Defense electronics & radar order pipeline remains robust. Use 2.0x ATR wider stop on PSU Defense stocks.' },
+      { symbol: 'MCX', name: 'Multi Commodity Exchange', sector: 'Capital Markets', universe: 'MIDCAP_100', exchange: 'NSE', price: 3390.00, change: 2.16, trigger: 3415.00, atr: 114.15, atrPct: 3.37, rsi: 66.8, rvol: 2.4, rs6m: 33.2, score: 89, aiScore: 88, setup: 'Stage-2 Breakout', preset: ['pocket', 'stage2'], aiSummary: 'Commodity options Average Daily Turnover (ADT) hitting record highs after new tech platform transition.' },
+      { symbol: 'SIEMENS', name: 'Siemens Limited', sector: 'Capital Goods', universe: 'MIDCAP_100', exchange: 'NSE', price: 3654.00, change: 1.64, trigger: 3862.70, atr: 105.24, atrPct: 2.88, rsi: 62.4, rvol: 1.8, rs6m: 21.0, score: 88, aiScore: 87, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'Energy demerger value unlocking and HVDC transmission equipment order inflows.' },
+      { symbol: 'KAYNES', name: 'Kaynes Technology India', sector: 'EMS / Semicon', universe: 'MIDCAP_100', exchange: 'NSE', price: 3222.10, change: -1.28, trigger: 3707.20, atr: 129.24, atrPct: 4.01, rsi: 66.5, rvol: 2.3, rs6m: 34.0, score: 89, aiScore: 88, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'High-margin industrial & aerospace PCB assembly order book plus OSAT semiconductor approval.' },
+      { symbol: 'KPITTECH', name: 'KPIT Technologies Ltd', sector: 'Auto ER&D Software', universe: 'MIDCAP_100', exchange: 'NSE', price: 481.00, change: 0.42, trigger: 519.70, atr: 16.20, atrPct: 3.37, rsi: 61.8, rvol: 1.9, rs6m: 16.2, score: 86, aiScore: 85, setup: 'VCP Tight Base', preset: ['vcp'], aiSummary: 'Global OEM software-defined vehicle (SDV) middleware programs driving 20%+ CC growth.' },
+      { symbol: 'MAZDOCK', name: 'Mazagon Dock Shipbuilders', sector: 'Defense Shipbuilding', universe: 'MIDCAP_100', exchange: 'NSE', price: 2027.00, change: 0.85, trigger: 2199.40, atr: 49.14, atrPct: 2.42, rsi: 63.4, rvol: 2.2, rs6m: 26.4, score: 87, aiScore: 85, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'Next-gen destroyer & submarine order pipeline providing multi-year execution visibility.' },
+      { symbol: 'COCHINSHIP', name: 'Cochin Shipyard Ltd', sector: 'Defense Shipbuilding', universe: 'MIDCAP_100', exchange: 'NSE', price: 1232.00, change: 0.16, trigger: 1372.40, atr: 37.99, atrPct: 3.08, rsi: 60.9, rvol: 2.0, rs6m: 22.1, score: 85, aiScore: 83, setup: 'Stage-2 Breakout', preset: ['stage2'], aiSummary: 'European hybrid vessel export contracts and naval ship repair dock expansion.' },
+      { symbol: 'ZOMATO', name: 'Zomato Ltd (Eternal)', sector: 'Consumer Tech', universe: 'MIDCAP_100', exchange: 'NSE', price: 323.00, change: -0.14, trigger: 335.10, atr: 9.06, atrPct: 2.80, rsi: 65.8, rvol: 2.5, rs6m: 32.8, score: 89, aiScore: 88, setup: 'Stage-2 Breakout', preset: ['vcp', 'pocket', 'stage2'], aiSummary: 'Blinkit quick-commerce dark store expansion and rising food delivery contribution margins.' },
+      { symbol: 'LUPIN', name: 'Lupin Limited', sector: 'Pharmaceuticals', universe: 'MIDCAP_100', exchange: 'NSE', price: 1935.00, change: -1.10, trigger: 2098.60, atr: 36.76, atrPct: 1.90, rsi: 62.2, rvol: 1.8, rs6m: 20.4, score: 88, aiScore: 86, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'US complex respiratory & inhalation generic launches driving EBITDA margin above 22%.' },
       // BSE SENSEX & BSE 500 HIGH-MOMENTUM LEADERS (.BO)
-      { symbol: 'IREDA', scripCode: '544026', exchange: 'BSE', name: 'Indian Renewable Energy Dev Agency', sector: 'Green Energy Finance', universe: 'BSE_500', price: 234.50, change: 3.18, trigger: 237.00, atr: 6.80, atrPct: 2.90, rsi: 64.1, rvol: 2.4, rs6m: 31.5, score: 92, aiScore: 90, setup: 'Pocket Pivot', preset: ['vcp', 'pocket', 'stage2'], aiSummary: 'BSE Filing (544026): Loan sanctions surged +44% YoY to ₹17,860 Cr across solar & green hydrogen projects with improving GNPA.' },
-      { symbol: 'JYOTICNC', scripCode: '544081', exchange: 'BSE', name: 'Jyoti CNC Automation Ltd', sector: 'Industrial CNC & Aerospace', universe: 'BSE_500', price: 1185.00, change: 2.95, trigger: 1198.00, atr: 28.00, atrPct: 2.36, rsi: 65.8, rvol: 2.3, rs6m: 36.2, score: 93, aiScore: 91, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (544081): 5-axis aerospace & defense CNC order book crossed ₹3,400 Cr with debt-free balance sheet post QIP.' },
-      { symbol: 'NETWEB', scripCode: '543945', exchange: 'BSE', name: 'Netweb Technologies India', sector: 'AI Supercomputing & Servers', universe: 'BSE_500', price: 2680.00, change: 3.40, trigger: 2710.00, atr: 64.00, atrPct: 2.39, rsi: 66.4, rvol: 2.6, rs6m: 41.0, score: 94, aiScore: 92, setup: 'Pocket Pivot', preset: ['vcp', 'pocket', 'stage2'], aiSummary: 'BSE Filing (543945): NVIDIA Hopper/Blackwell Tyrone AI server architecture OEM partner seeing 68% YoY revenue acceleration.' },
-      { symbol: 'WAAREEENER', scripCode: '544277', exchange: 'BSE', name: 'Waaree Energies Limited', sector: 'Solar PV Modules & New Energy', universe: 'BSE_500', price: 2940.00, change: 2.85, trigger: 2975.00, atr: 72.00, atrPct: 2.45, rsi: 63.9, rvol: 2.2, rs6m: 29.8, score: 91, aiScore: 89, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (544277): 13.3 GW solar module capacity + backward cell integration driving ₹47,000 Cr executable order book.' },
-      { symbol: 'ANANTRAJ', scripCode: '515055', exchange: 'BSE', name: 'Anant Raj Limited', sector: 'Data Centers & Real Estate', universe: 'BSE_500', price: 768.00, change: 2.60, trigger: 776.00, atr: 18.50, atrPct: 2.41, rsi: 64.5, rvol: 2.1, rs6m: 34.6, score: 90, aiScore: 88, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (515055): 300 MW Tier-III cloud data center expansion in Manesar/Panchkula with BharatNet & enterprise cloud leases.' },
-      { symbol: 'TARIL', scripCode: '532928', exchange: 'BSE', name: 'Transformers & Rectifiers (India)', sector: 'Power T&D Equipment', universe: 'BSE_500', price: 942.00, change: 3.10, trigger: 952.00, atr: 23.00, atrPct: 2.44, rsi: 66.1, rvol: 2.5, rs6m: 38.4, score: 92, aiScore: 90, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'BSE Filing (532928): High-voltage 765kV & STATCOM transformer orders from PowerGrid and renewable developers.' },
-      { symbol: 'PGEL', scripCode: '533581', exchange: 'BSE', name: 'PG Electroplast Limited', sector: 'EMS / Consumer Durables', universe: 'BSE_500', price: 694.00, change: 2.45, trigger: 702.00, atr: 16.50, atrPct: 2.38, rsi: 63.2, rvol: 2.0, rs6m: 31.2, score: 90, aiScore: 88, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (533581): Room AC & washing machine ODM manufacturing volume up +48% YoY with PLI milestone incentives.' },
-      { symbol: 'TITAGARH', scripCode: '532966', exchange: 'BSE', name: 'Titagarh Rail Systems Ltd', sector: 'Railways & Metro Rolling Stock', universe: 'BSE_500', price: 1248.00, change: 2.15, trigger: 1262.00, atr: 29.00, atrPct: 2.32, rsi: 61.4, rvol: 1.9, rs6m: 22.5, score: 88, aiScore: 86, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (532966): Vande Bharat sleeper coach & metro car execution ramp-up with ₹26,000 Cr combined order book.' }
+      { symbol: 'IREDA', scripCode: '544026', exchange: 'BSE', name: 'Indian Renewable Energy Dev Agency', sector: 'Green Energy Finance', universe: 'BSE_500', price: 104.50, change: 0.29, trigger: 117.40, atr: 3.15, atrPct: 3.01, rsi: 64.1, rvol: 2.4, rs6m: 31.5, score: 92, aiScore: 90, setup: 'Pocket Pivot', preset: ['vcp', 'pocket', 'stage2'], aiSummary: 'BSE Filing (544026): Loan sanctions surged +44% YoY to ₹17,860 Cr across solar & green hydrogen projects with improving GNPA.' },
+      { symbol: 'JYOTICNC', scripCode: '544081', exchange: 'BSE', name: 'Jyoti CNC Automation Ltd', sector: 'Industrial CNC & Aerospace', universe: 'BSE_500', price: 1017.40, change: 1.83, trigger: 1090.00, atr: 42.76, atrPct: 4.20, rsi: 65.8, rvol: 2.3, rs6m: 36.2, score: 93, aiScore: 91, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (544081): 5-axis aerospace & defense CNC order book crossed ₹3,400 Cr with debt-free balance sheet post QIP.' },
+      { symbol: 'NETWEB', scripCode: '543945', exchange: 'BSE', name: 'Netweb Technologies India', sector: 'AI Supercomputing & Servers', universe: 'BSE_500', price: 5001.45, change: 5.94, trigger: 5058.95, atr: 165.68, atrPct: 3.31, rsi: 66.4, rvol: 2.6, rs6m: 41.0, score: 94, aiScore: 92, setup: 'Pocket Pivot', preset: ['vcp', 'pocket', 'stage2'], aiSummary: 'BSE Filing (543945): NVIDIA Hopper/Blackwell Tyrone AI server architecture OEM partner seeing 68% YoY revenue acceleration.' },
+      { symbol: 'WAAREEENER', scripCode: '544277', exchange: 'BSE', name: 'Waaree Energies Limited', sector: 'Solar PV Modules & New Energy', universe: 'BSE_500', price: 2350.00, change: 1.29, trigger: 2508.95, atr: 56.33, atrPct: 2.40, rsi: 63.9, rvol: 2.2, rs6m: 29.8, score: 91, aiScore: 89, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (544277): 13.3 GW solar module capacity + backward cell integration driving ₹47,000 Cr executable order book.' },
+      { symbol: 'ANANTRAJ', scripCode: '515055', exchange: 'BSE', name: 'Anant Raj Limited', sector: 'Data Centers & Real Estate', universe: 'BSE_500', price: 569.55, change: -0.21, trigger: 592.00, atr: 21.94, atrPct: 3.85, rsi: 64.5, rvol: 2.1, rs6m: 34.6, score: 90, aiScore: 88, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (515055): 300 MW Tier-III cloud data center expansion in Manesar/Panchkula with BharatNet & enterprise cloud leases.' },
+      { symbol: 'TARIL', scripCode: '532928', exchange: 'BSE', name: 'Transformers & Rectifiers (India)', sector: 'Power T&D Equipment', universe: 'BSE_500', price: 294.80, change: 1.43, trigger: 298.60, atr: 11.11, atrPct: 3.77, rsi: 66.1, rvol: 2.5, rs6m: 38.4, score: 92, aiScore: 90, setup: 'Pocket Pivot', preset: ['pocket', 'stage2'], aiSummary: 'BSE Filing (532928): High-voltage 765kV & STATCOM transformer orders from PowerGrid and renewable developers.' },
+      { symbol: 'PGEL', scripCode: '533581', exchange: 'BSE', name: 'PG Electroplast Limited', sector: 'EMS / Consumer Durables', universe: 'BSE_500', price: 524.20, change: 2.85, trigger: 532.55, atr: 17.42, atrPct: 3.32, rsi: 63.2, rvol: 2.0, rs6m: 31.2, score: 90, aiScore: 88, setup: 'VCP Stage-2', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (533581): Room AC & washing machine ODM manufacturing volume up +48% YoY with PLI milestone incentives.' },
+      { symbol: 'TITAGARH', scripCode: '532966', exchange: 'BSE', name: 'Titagarh Rail Systems Ltd', sector: 'Railways & Metro Rolling Stock', universe: 'BSE_500', price: 764.30, change: -1.66, trigger: 851.00, atr: 21.26, atrPct: 2.78, rsi: 61.4, rvol: 1.9, rs6m: 22.5, score: 88, aiScore: 86, setup: 'VCP Tight Base', preset: ['vcp', 'stage2'], aiSummary: 'BSE Filing (532966): Vande Bharat sleeper coach & metro car execution ramp-up with ₹26,000 Cr combined order book.' }
     ];
 
     const BACKTEST_DATA = {
@@ -2030,7 +2030,7 @@
               </td>
               <td class="mono">
                 <div style="font-weight:700;">₹${s.price.toLocaleString('en-IN')}</div>
-                <div class="${s.change >= 0 ? 'bull' : 'bear'}" style="font-size:12px;">+${s.change.toFixed(2)}%</div>
+                <div class="${s.change >= 0 ? 'bull' : 'bear'}" style="font-size:12px;">${s.change >= 0 ? '+' : ''}${s.change.toFixed(2)}%</div>
               </td>
               <td class="mono" style="color:var(--accent); font-weight:700;">
                 ₹${s.trigger.toLocaleString('en-IN')}
@@ -2163,7 +2163,7 @@
       state.universe = 'ALL';
       document.getElementById('universeSelect').value = 'ALL';
       renderScreenerTable();
-      showToast(`✓ Added ${raw} to NSE Universe! Opening Deep-Dive Chart...`);
+      showToast(`✓ Added ${raw} to ${resolvedEx} Universe! Opening Deep-Dive Chart...`);
       inspectStock(raw);
     }
 
@@ -2173,6 +2173,7 @@
     function renderDeepDivePage() {
       populateStockDropdowns();
       const s = STOCKS.find(item => item.symbol === state.selectedSymbol) || STOCKS[0];
+      const ex = getStockExchange(s);
       document.getElementById('navBadgeStock').textContent = s.symbol;
       document.getElementById('ddStockDropdown').value = s.symbol;
 
@@ -2184,12 +2185,14 @@
 
       document.getElementById('ddSymbol').textContent = s.symbol;
       document.getElementById('ddSetupBadge').textContent = s.setup;
-      document.getElementById('ddUniverseBadge').textContent = s.universe === 'NIFTY_50' ? 'NIFTY 50' : (s.universe === 'MIDCAP_100' ? 'MIDCAP 100' : 'CUSTOM NSE');
+      document.getElementById('ddUniverseBadge').textContent = ex === 'BSE' ? `BSE:${s.scripCode || '500'}` : (s.universe === 'NIFTY_50' ? 'NSE • NIFTY 50' : (s.universe === 'MIDCAP_100' ? 'NSE • MIDCAP 100' : 'NSE • LIVE'));
       document.getElementById('ddScoreBadge').textContent = `Quant: ${s.score}/100`;
       document.getElementById('ddHeroAiBadge').textContent = `🤖 Bullish • ${s.aiScore}`;
       document.getElementById('ddNameSector').textContent = `${s.name} • ${s.sector}`;
       document.getElementById('ddPrice').textContent = `₹${s.price.toLocaleString('en-IN')}`;
-      document.getElementById('ddChange').textContent = `+${s.change.toFixed(2)}%`;
+      const ddChgEl = document.getElementById('ddChange');
+      ddChgEl.textContent = `${s.change >= 0 ? '+' : ''}${s.change.toFixed(2)}%`;
+      ddChgEl.className = `mono ${s.change >= 0 ? 'bull' : 'bear'}`;
 
       // Risk & Position Sizing calculation
       const riskRupees = Math.round(state.capital * (state.riskPercent / 100));
@@ -2710,21 +2713,42 @@
     // =========================================================================
     state.generatedAiAlerts = [];
 
-    async function runLiveScan() {
+    function applyLiveQuotesMap(quotes) {
+      if (!quotes || typeof quotes !== 'object') return 0;
+      let count = 0;
+      STOCKS.forEach(s => {
+        const q = quotes[s.symbol];
+        if (q && q.price) {
+          s.price = q.price;
+          if (typeof q.change === 'number') s.change = q.change;
+          if (q.atr) s.atr = q.atr;
+          if (q.atrPct) s.atrPct = q.atrPct;
+          if (q.trigger) s.trigger = q.trigger;
+          count++;
+        }
+      });
+      return count;
+    }
+
+    async function runLiveScan(silent = false) {
       const btn = document.getElementById('scanBtn');
-      btn.textContent = '⟳ Syncing...';
+      if (btn && !silent) btn.textContent = '⟳ Syncing...';
       try {
-        const res = await fetch(`${getApiBase()}/api/v1/screener/sync-live?exchange=ALL`, { method: 'POST' });
+        const res = await fetch(`${getApiBase()}/api/v1/screener/live-quotes`);
         if (res.ok) {
-          showToast('✓ Synced live NSE (.NS) & BSE (.BO) OHLCV across universe from FastAPI engine');
-        } else {
+          const payload = await res.json();
+          const updated = applyLiveQuotesMap(payload.quotes);
+          if (!silent) showToast(`✓ Synced live NSE & BSE prices for ${updated} stocks from Yahoo Finance!`);
+        } else if (!silent) {
           showToast(`✓ Refreshed ${STOCKS.length}-Stock NSE & BSE VCP Screener Universe`);
         }
       } catch {
-        showToast(`✓ Refreshed ${STOCKS.length}-Stock NSE & BSE VCP Screener Universe`);
+        if (!silent) showToast(`✓ Refreshed ${STOCKS.length}-Stock NSE & BSE VCP Screener Universe`);
       } finally {
-        btn.textContent = '⟳ Sync NSE & BSE';
+        if (btn) btn.textContent = '⟳ Sync NSE & BSE';
         renderScreenerTable();
+        if (state.activePage === 'deepdive') renderDeepDivePage();
+        renderPortfolioAiWatchbook();
       }
     }
 
@@ -3022,6 +3046,7 @@
       renderPortfolioPage();
       renderBacktestUniverseTable();
       renderPortfolioAiWatchbook();
+      runLiveScan(true);
     });
 
     window.addEventListener('resize', () => {
